@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,17 +18,9 @@
 
 <body>
   <!-----NavBar---->
-  <!-- <div class="navbar">
-    <img src="assets/images/logo_transparent-CROPPED.png" id="logo" alt="dbuggr logo">
-  </div>
-  <div id="nav-menu">
-    <a href="#log_out">Log Out</a>
-    <a href="#create_ticket">Create Ticket</a>
-    <a class="active" href="tickets.html">Ticket Dashboard</a>
-  </div> -->
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
       <img alt="dbuggr logo" src="assets/images/logo_transparent-CROPPED.png">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -39,6 +30,14 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
+          <li id="nav-link">ejs version</li>
+        <li class="nav-item">
+            <a class="nav-link" href="/createForm">Create Ticket</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/ticketDash">Ticket Dashboard</a>
+        </li>
+<!--         
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
@@ -59,12 +58,8 @@
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
+        </li> -->
       </ul>
-      <!-- <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form> -->
     </div>
   </nav>
 
@@ -96,15 +91,17 @@
         </div>
       </div>
     </div>
-
     <!---- Ticket Display --->
     <div id="ticketDisplay" class="container-fluid">
-      <button id="create">Create Ticket</button>
-      <button id="edit">Edit Ticket</button>
+        <!-- <div class=""> -->
+            <button id="createTicketButton">Create Ticket</button>
+        <!-- </div> -->
+      
+      <!-- <button id="edit">Edit Ticket</button> -->
       <div class="row">
         <div class="col-11 container-fluid justify-content-center">
           <!----- Heading ----->
-          <table>
+          <table id="ticket-table">
             <tr>
               <th>ID#</th>
               <th>TITLE</th>
@@ -114,7 +111,24 @@
               <th>ASSIGNED TO</th>
               <th></th>
             </tr>
-            <!----Tickets------>
+
+            <!-- ticket loop -->
+            <% for(var i = 0; i < tickets.length; i++) {%>
+                <tr>
+                  <!-- Output details from the iterated quote object -->
+                    <td><%= i+1 %></td>
+                    <td><%= tickets[i].ticketTitle %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <btn class="btn btn-danger">Edit</btn>
+                        <btn class="btn btn-danger">Delete</btn>
+                    </td>
+                </tr>
+            <% } %>
+            <!-- end ticket loop -->
             <tr>
               <td class="td">10001</td>
               <td>Tom</td>
@@ -127,104 +141,11 @@
                 <btn class="btn btn-danger">Delete</btn>
               </td>
             </tr>
-            <tr>
-              <td class="td">10002</td>
-              <td>Sally</td>
-              <td>F</td>
-              <td>28</td>
-              <td>M</td>
-              <td>30</td>
-              <td>
-                <btn class="btn btn-danger">Edit</btn>
-                <btn class="btn btn-danger">Delete</btn>
-              </td>
-            </tr>
-            <tr>
-              <td class="td">10003</td>
-              <td>Emma</td>
-              <td>F</td>
-              <td>24</td>
-              <td>M</td>
-              <td>30</td>
-              <td>
-                <btn class="btn btn-danger">Edit</btn>
-                <btn class="btn btn-danger">Delete</btn>
-              </td>
-            </tr>
           </table>
-
-          <!------
-          <div id="ticketHeader" class="row text-center pt-4">
-            <div class="card col-sm-1">
-              <p class="card-text">ID#</p>
-            </div>
-            <div class="card col-sm-3">
-              <p class="card-text">Title</p>
-            </div>
-            <div class=" card col-sm-3">
-              <p class="card-text">Created By</p>
-            </div>
-            <div class="card col-sm-1">
-              <p class="card-text">Date Created</p>
-            </div>
-            <div class="card col-sm-1">
-              <p class="card-text">Date Due</p>
-            </div>
-            <div class="card col-sm-2">
-              <p class="card-text">Assigned To</p>
-            </div>
-            <div class="card col-sm-1">
-              <p class="card-text"></p>
-            </div>
-          </div>
-          Tickets 
-         <div id="tickets" class="row text-center pt-4">
-            <div class="card col-sm-1">
-              <p class="card-text">1289374</p>
-            </div>
-            <div class="card col-sm-3">
-              <p class="card-text">Server is not connecting</p>
-            </div>
-            <div class="card col-sm-3">
-              <p class="card-text">Dennis Franz</p>
-            </div>
-            <div class="card col-sm-1">
-              <p class="card-text">1/23/2021</p>
-            </div>
-            <div class="card col-sm-1">
-              <p class="card-text">2/23/2021</p>
-            </div>
-            <div class="card col-sm-2">
-              <p class="card-text">Terry Solson</p>
-            </div>
-            <div class="card col-sm-1">
-              <p class="btn btn-danger">Delete</btn>
-            </div>
-            <div class="card col-sm-1">
-              <p class="card-text">238998</p>
-            </div>
-            <div class="card col-sm-3">
-              <p class="card-text">Trouble with the UI</p>
-            </div>
-            <div class="card col-sm-3">
-              <p class="card-text">Elliot Ness</p>
-            </div>
-            <div class="card col-sm-1">
-              <p class="card-text">12/4/19</p>
-            </div>
-            <div class="card col-sm-1">
-              <p class="card-text">1/4/20</p>
-            </div>
-            <div class="card col-sm-2">
-              <p class="card-text">Stephanie Mills</p>
-            </div>
-           
-           </div> ----->
         </div>
       </div>
     </div>
   </div>
-  <script src="main.js"></script>
   <footer class="col-12 container-fluid justify-content-center">
     <p>
       Copyright &copy;
@@ -234,6 +155,8 @@
       - All Rights Reserved
     </p>
   </footer>
+  
+  <script src="assets/javascript/main.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -246,4 +169,3 @@
 </body>
 
 </html>
-
